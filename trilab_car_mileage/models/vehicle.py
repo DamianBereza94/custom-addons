@@ -109,5 +109,5 @@ class Vehicle(models.Model):
             'view_mode': 'tree',
             'res_model': 'mileage.model',
             'target': 'current',
-            'context': {'default_vehicle_id': self.id},
+            'domain': [('vehicle_id', '=', self.id)],
         }

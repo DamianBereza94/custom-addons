@@ -69,6 +69,7 @@ class Mileage(models.Model):
         This search uses logical operators to find records with an earlier odometer reading on the same departure date
         or any record from a previous date, prioritizing the closest records by date and odometer reading.
         """
+
         if previous_odometer := self.sudo().search_fetch(
             [
                 "|",
@@ -83,17 +84,13 @@ class Mileage(models.Model):
             limit=1,
         ):
             return previous_odometer[0].odometer_at_end
-        else:
-            return None
+        return None
 
     @api.onchange("odometer_at_end")
     def _compute_traveled_distance(self):
         for rec in self:
-
-            previous_odometer = rec.get_previous_odometer()
-            rec.traveled_distance = (
-                (rec.odometer_at_end - previous_odometer) if previous_odometer else rec.odometer_at_end
-            )
+            rec.traveled_distance = rec.odometer_at_end - previous_odometer if (
+                previous_odometer := rec.get_previous_odometer()) else rec.odometer_at_end
 
     @api.constrains("departure_date", "return_date")
     def _check_dates(self):
@@ -103,10 +100,7 @@ class Mileage(models.Model):
         Still there can be two or more mileage records in one day.
         """
         # Dates order
-        for rec in self.sorted(key=lambda r: r.departure_date):  # Sprawdza w kolejnosci od
-            # najmniejszego do
-            # najwiekszego
-
+        for rec in self.sorted(key=lambda r: r.departure_date):
             if self.sudo().search_count(
                 [
                     ("id", "not in", self.ids),
