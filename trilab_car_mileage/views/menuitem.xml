@@ -1,0 +1,15 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<odoo>
+    <menuitem id='menu_root_trilab_car_mileage' name='Trilab Car Mileage'
+              web_icon='trilab_car_mileage,static/description/icon.png'
+              groups='trilab_car_mileage.group_car_owners,base.group_system,trilab_car_mileage.group_accountant'>
+        <menuitem id='menu_trilab_car_mileage_vehicle' name='Vehicles' sequence='1'
+                  groups="trilab_car_mileage.group_car_owners,base.group_system">
+            <menuitem id='menu_vehicle' name='Vehicles' action='trilab_car_mileage.action_vehicle'/>
+        </menuitem>
+        <menuitem id='menu_trilab_car_mileage_mileage_report' name='Reports' sequence='2'
+                  groups="base.group_system,trilab_car_mileage.group_accountant">
+            <menuitem id='menu_mileage_report' name='Mileages Report' action='trilab_car_mileage.action_mileage_report'/>
+        </menuitem>
+    </menuitem>
+</odoo>

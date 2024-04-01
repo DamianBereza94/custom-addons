@@ -1,0 +1,13 @@
+<odoo>
+    <data>
+        <record id="trilab_car_mileage.group_car_owners" model="res.groups">
+            <field name="name">Car Owners</field>
+            <field name="users" eval="[(4, ref('base.group_user'))]"/>
+        </record>
+
+        <record id="trilab_car_mileage.group_accountant" model="res.groups">
+            <field name="name">Accountant</field>
+            <field name="users" eval="[(4, ref('base.group_user'))]"/>
+        </record>
+    </data>
+</odoo>

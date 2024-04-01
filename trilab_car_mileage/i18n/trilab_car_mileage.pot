@@ -1,0 +1,428 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+# 	* trilab_car_mileage
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 17.0+e\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2024-03-27 18:30+0000\n"
+"PO-Revision-Date: 2024-03-27 18:30+0000\n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Plural-Forms: \n"
+
+#. module: trilab_car_mileage
+#: model:ir.model.fields,field_description:trilab_car_mileage.field_vehicle_model__active
+#: model_terms:ir.ui.view,arch_db:trilab_car_mileage.vehicle_model_search_view
+msgid "Active"
+msgstr ""
+
+#. module: trilab_car_mileage
+#: model:ir.model.fields,help:trilab_car_mileage.field_vehicle_model__user_id
+msgid ""
+"Assign a user as the owner of the vehicle. Only accessible by "
+"administrators."
+msgstr ""
+
+#. module: trilab_car_mileage
+#: model:ir.model.fields,help:trilab_car_mileage.field_mileage_model__traveled_distance
+msgid "Automatically calculated distance traveled during the trip."
+msgstr ""
+
+#. module: trilab_car_mileage
+#: model:ir.model.fields,help:trilab_car_mileage.field_mileage_report_model__odometer_at_end
+msgid ""
+"Automatically calculated odometer reading at the end of the last trip within"
+" the report’s time frame."
+msgstr ""
+
+#. module: trilab_car_mileage
+#: model:ir.model.fields,help:trilab_car_mileage.field_mileage_report_model__odometer_at_start
+msgid ""
+"Automatically calculated odometer reading at the start of the first trip "
+"within the report’s time frame."
+msgstr ""
+
+#. module: trilab_car_mileage
+#: model:ir.model.fields.selection,name:trilab_car_mileage.selection__vehicle_model__vehicle_type__gt9
+msgid "Car engine capacity above 900cc"
+msgstr ""
+
+#. module: trilab_car_mileage
+#: model:ir.model.fields.selection,name:trilab_car_mileage.selection__vehicle_model__vehicle_type__lte9
+msgid "Car engine capacity below or equal to 900cc"
+msgstr ""
+
+#. module: trilab_car_mileage
+#: model_terms:ir.actions.act_window,help:trilab_car_mileage.action_mileage_report
+msgid "Create your first mileage report"
+msgstr ""
+
+#. module: trilab_car_mileage
+#: model_terms:ir.actions.act_window,help:trilab_car_mileage.action_vehicle
+msgid "Create your first vehicle"
+msgstr ""
+
+#. module: trilab_car_mileage
+#: model:ir.model.fields,field_description:trilab_car_mileage.field_mileage_model__create_uid
+#: model:ir.model.fields,field_description:trilab_car_mileage.field_mileage_report_model__create_uid
+#: model:ir.model.fields,field_description:trilab_car_mileage.field_vehicle_model__create_uid
+msgid "Created by"
+msgstr ""
+
+#. module: trilab_car_mileage
+#: model:ir.model.fields,field_description:trilab_car_mileage.field_mileage_model__create_date
+#: model:ir.model.fields,field_description:trilab_car_mileage.field_mileage_report_model__create_date
+#: model:ir.model.fields,field_description:trilab_car_mileage.field_vehicle_model__create_date
+msgid "Created on"
+msgstr ""
+
+#. module: trilab_car_mileage
+#: model:ir.model.fields,field_description:trilab_car_mileage.field_mileage_model__departure_date
+msgid "Date Of Departure"
+msgstr ""
+
+#. module: trilab_car_mileage
+#: model:ir.model.fields,field_description:trilab_car_mileage.field_mileage_model__return_date
+msgid "Date Of Return"
+msgstr ""
+
+#. module: trilab_car_mileage
+#: model:ir.model.fields,help:trilab_car_mileage.field_mileage_report_model__start_date
+msgid "Defines the beginning of the reporting period."
+msgstr ""
+
+#. module: trilab_car_mileage
+#: model:ir.model.fields,help:trilab_car_mileage.field_mileage_report_model__end_date
+msgid "Defines the end of the reporting period."
+msgstr ""
+
+#. module: trilab_car_mileage
+#: model:ir.model.fields,help:trilab_car_mileage.field_mileage_model__trip_reason
+msgid "Describes the purpose of the trip."
+msgstr ""
+
+#. module: trilab_car_mileage
+#: model:ir.model.fields,field_description:trilab_car_mileage.field_mileage_model__display_name
+#: model:ir.model.fields,field_description:trilab_car_mileage.field_mileage_report_model__display_name
+#: model:ir.model.fields,field_description:trilab_car_mileage.field_vehicle_model__display_name
+msgid "Display Name"
+msgstr ""
+
+#. module: trilab_car_mileage
+#: model:ir.model.fields,help:trilab_car_mileage.field_mileage_report_model__driver_id
+msgid ""
+"Displays the primary driver associated with the vehicle for the specified "
+"period."
+msgstr ""
+
+#. module: trilab_car_mileage
+#: model:ir.model.fields,field_description:trilab_car_mileage.field_mileage_model__driver_id
+#: model:ir.model.fields,field_description:trilab_car_mileage.field_mileage_report_model__driver_id
+msgid "Driver"
+msgstr ""
+
+#. module: trilab_car_mileage
+#: model:ir.model.fields,field_description:trilab_car_mileage.field_mileage_report_model__end_date
+msgid "End Date"
+msgstr ""
+
+#. module: trilab_car_mileage
+#: model:ir.model.fields,field_description:trilab_car_mileage.field_mileage_model__end_location
+msgid "End Location"
+msgstr ""
+
+#. module: trilab_car_mileage
+#: model_terms:ir.ui.view,arch_db:trilab_car_mileage.vehicle_model_search_view
+msgid "Engines > 900cc"
+msgstr ""
+
+#. module: trilab_car_mileage
+#: model_terms:ir.ui.view,arch_db:trilab_car_mileage.vehicle_model_search_view
+msgid "Engines ≤ 900cc"
+msgstr ""
+
+#. module: trilab_car_mileage
+#: model:ir.model.fields,help:trilab_car_mileage.field_vehicle_model__name
+msgid ""
+"Enter the vehicle's unique registration number. It should consist of 1 to 15"
+" uppercase letters, numbers, and hyphens."
+msgstr ""
+
+#. module: trilab_car_mileage
+#: model_terms:ir.ui.view,arch_db:trilab_car_mileage.vehicle_model_search_view
+msgid "Group By"
+msgstr ""
+
+#. module: trilab_car_mileage
+#: model:ir.model.fields,field_description:trilab_car_mileage.field_mileage_model__id
+#: model:ir.model.fields,field_description:trilab_car_mileage.field_mileage_report_model__id
+#: model:ir.model.fields,field_description:trilab_car_mileage.field_vehicle_model__id
+msgid "ID"
+msgstr ""
+
+#. module: trilab_car_mileage
+#: model:ir.model.fields,help:trilab_car_mileage.field_mileage_model__driver_id
+msgid ""
+"Identifies the user who drove the vehicle for this specific trip. By "
+"default, this is set to the current logged-in user."
+msgstr ""
+
+#. module: trilab_car_mileage
+#: model_terms:ir.ui.view,arch_db:trilab_car_mileage.vehicle_model_search_view
+msgid "Inactive"
+msgstr ""
+
+#. module: trilab_car_mileage
+#: model:ir.model.fields,help:trilab_car_mileage.field_mileage_model__return_date
+msgid ""
+"Indicates the date when the trip ended and the vehicle returned to its final"
+" destination."
+msgstr ""
+
+#. module: trilab_car_mileage
+#: model:ir.model.fields,field_description:trilab_car_mileage.field_mileage_model__write_uid
+#: model:ir.model.fields,field_description:trilab_car_mileage.field_mileage_report_model__write_uid
+#: model:ir.model.fields,field_description:trilab_car_mileage.field_vehicle_model__write_uid
+msgid "Last Updated by"
+msgstr ""
+
+#. module: trilab_car_mileage
+#: model:ir.model.fields,field_description:trilab_car_mileage.field_mileage_model__write_date
+#: model:ir.model.fields,field_description:trilab_car_mileage.field_mileage_report_model__write_date
+#: model:ir.model.fields,field_description:trilab_car_mileage.field_vehicle_model__write_date
+msgid "Last Updated on"
+msgstr ""
+
+#. module: trilab_car_mileage
+#: model:ir.model.fields,help:trilab_car_mileage.field_mileage_model__vehicle_id
+msgid ""
+"Links this mileage record to a specific vehicle from the Vehicle model, "
+"establishing which vehicle was used for the trip."
+msgstr ""
+
+#. module: trilab_car_mileage
+#: model:ir.model.fields,help:trilab_car_mileage.field_mileage_report_model__mileage_ids
+msgid ""
+"Lists all mileage records associated with the vehicle that fall within the "
+"specified date range."
+msgstr ""
+
+#. module: trilab_car_mileage
+#: model:ir.model.fields,field_description:trilab_car_mileage.field_mileage_report_model__mileage_ids
+msgid "Mileage"
+msgstr ""
+
+#. module: trilab_car_mileage
+#: model:ir.model,name:trilab_car_mileage.model_mileage_model
+#: model_terms:ir.ui.view,arch_db:trilab_car_mileage.mileage_model_form_view
+msgid "Mileage Record"
+msgstr ""
+
+#. module: trilab_car_mileage
+#: model:ir.model.fields,field_description:trilab_car_mileage.field_vehicle_model__mileage_ids
+msgid "Mileage Records"
+msgstr ""
+
+#. module: trilab_car_mileage
+#: model:ir.model,name:trilab_car_mileage.model_mileage_report_model
+#: model_terms:ir.ui.view,arch_db:trilab_car_mileage.view_mileage_report_form
+msgid "Mileage Report"
+msgstr ""
+
+#. module: trilab_car_mileage
+#: model:ir.actions.act_window,name:trilab_car_mileage.action_mileage_report
+msgid "Mileage Reports"
+msgstr ""
+
+#. module: trilab_car_mileage
+#: model_terms:ir.ui.view,arch_db:trilab_car_mileage.vehicle_model_form_view
+#: model_terms:ir.ui.view,arch_db:trilab_car_mileage.view_mileage_report_form
+msgid "Mileages"
+msgstr ""
+
+#. module: trilab_car_mileage
+#: model:ir.ui.menu,name:trilab_car_mileage.menu_mileage_report
+msgid "Mileages Report"
+msgstr ""
+
+#. module: trilab_car_mileage
+#: model:ir.model.fields.selection,name:trilab_car_mileage.selection__vehicle_model__vehicle_type__mb
+msgid "Motorbike"
+msgstr ""
+
+#. module: trilab_car_mileage
+#: model_terms:ir.ui.view,arch_db:trilab_car_mileage.vehicle_model_search_view
+msgid "Motorbikes"
+msgstr ""
+
+#. module: trilab_car_mileage
+#: model_terms:ir.ui.view,arch_db:trilab_car_mileage.vehicle_model_form_view
+msgid "No mileage records."
+msgstr ""
+
+#. module: trilab_car_mileage
+#: model:ir.model.fields,field_description:trilab_car_mileage.field_mileage_report_model__odometer_at_end
+msgid "Odometer At End"
+msgstr ""
+
+#. module: trilab_car_mileage
+#: model:ir.model.fields,field_description:trilab_car_mileage.field_mileage_report_model__odometer_at_start
+msgid "Odometer At Start"
+msgstr ""
+
+#. module: trilab_car_mileage
+#: model:ir.model.fields,field_description:trilab_car_mileage.field_mileage_model__odometer_at_end
+msgid "Odometer Reading at End"
+msgstr ""
+
+#. module: trilab_car_mileage
+#: model:ir.model.fields,field_description:trilab_car_mileage.field_vehicle_model__user_id
+#: model_terms:ir.ui.view,arch_db:trilab_car_mileage.vehicle_model_search_view
+msgid "Owner"
+msgstr ""
+
+#. module: trilab_car_mileage
+#: model_terms:ir.ui.view,arch_db:trilab_car_mileage.vehicle_model_form_view
+#: model_terms:ir.ui.view,arch_db:trilab_car_mileage.vehicle_model_tree_view
+msgid "Register Mileage"
+msgstr ""
+
+#. module: trilab_car_mileage
+#: model:ir.model.fields,field_description:trilab_car_mileage.field_mileage_model__vehicle_id
+#: model:ir.model.fields,field_description:trilab_car_mileage.field_mileage_report_model__registration_id
+#: model:ir.model.fields,field_description:trilab_car_mileage.field_vehicle_model__name
+#: model_terms:ir.ui.view,arch_db:trilab_car_mileage.vehicle_model_search_view
+msgid "Registration Number"
+msgstr ""
+
+#. module: trilab_car_mileage
+#: model:ir.ui.menu,name:trilab_car_mileage.menu_trilab_car_mileage_mileage_report
+msgid "Reports"
+msgstr ""
+
+#. module: trilab_car_mileage
+#: model:ir.model.fields.selection,name:trilab_car_mileage.selection__vehicle_model__vehicle_type__sct
+msgid "Scooter"
+msgstr ""
+
+#. module: trilab_car_mileage
+#: model_terms:ir.ui.view,arch_db:trilab_car_mileage.vehicle_model_search_view
+msgid "Scooters"
+msgstr ""
+
+#. module: trilab_car_mileage
+#: model:ir.model.fields,help:trilab_car_mileage.field_vehicle_model__vehicle_type
+msgid "Select the type of vehicle from the given options."
+msgstr ""
+
+#. module: trilab_car_mileage
+#: model:ir.model.fields,help:trilab_car_mileage.field_mileage_report_model__registration_id
+msgid "Selects the vehicle for which the report is being generated."
+msgstr ""
+
+#. module: trilab_car_mileage
+#: model:ir.model.fields,help:trilab_car_mileage.field_mileage_model__departure_date
+msgid ""
+"Specifies the date when the trip began. This should be the day the vehicle "
+"left its initial location."
+msgstr ""
+
+#. module: trilab_car_mileage
+#: model:ir.model.fields,field_description:trilab_car_mileage.field_mileage_report_model__start_date
+msgid "Start Date"
+msgstr ""
+
+#. module: trilab_car_mileage
+#: model:ir.model.fields,field_description:trilab_car_mileage.field_mileage_model__start_location
+msgid "Start Location"
+msgstr ""
+
+#. module: trilab_car_mileage
+#: model:ir.model.fields,help:trilab_car_mileage.field_mileage_model__end_location
+msgid "The final location of the trip"
+msgstr ""
+
+#. module: trilab_car_mileage
+#: model:ir.model.fields,help:trilab_car_mileage.field_mileage_model__odometer_at_end
+msgid "The reading of the vehicle's odometer at the end of the trip."
+msgstr ""
+
+#. module: trilab_car_mileage
+#: model:ir.model.fields,help:trilab_car_mileage.field_mileage_model__start_location
+msgid "The starting location of the trip."
+msgstr ""
+
+#. module: trilab_car_mileage
+#: model:ir.model.fields,help:trilab_car_mileage.field_mileage_report_model__total_distance
+msgid ""
+"The total distance traveled by the vehicle within the specified period."
+msgstr ""
+
+#. module: trilab_car_mileage
+#: model:ir.model.fields,help:trilab_car_mileage.field_vehicle_model__mileage_ids
+msgid "This field contains the mileage records associated with the vehicle."
+msgstr ""
+
+#. module: trilab_car_mileage
+#: model:ir.model.fields,help:trilab_car_mileage.field_vehicle_model__active
+msgid "Toggle the field to set the vehicle as active or inactive in fleet."
+msgstr ""
+
+#. module: trilab_car_mileage
+#: model:ir.model.fields,field_description:trilab_car_mileage.field_mileage_report_model__total_distance
+msgid "Total Distance"
+msgstr ""
+
+#. module: trilab_car_mileage
+#: model:ir.model.fields,field_description:trilab_car_mileage.field_mileage_model__traveled_distance
+msgid "Traveled Distance"
+msgstr ""
+
+#. module: trilab_car_mileage
+#: model:ir.ui.menu,name:trilab_car_mileage.menu_root_trilab_car_mileage
+msgid "Trilab Car Mileage"
+msgstr ""
+
+#. module: trilab_car_mileage
+#: model_terms:ir.ui.view,arch_db:trilab_car_mileage.mileage_model_form_view
+msgid "Trip Details"
+msgstr ""
+
+#. module: trilab_car_mileage
+#: model:ir.model.fields,field_description:trilab_car_mileage.field_mileage_model__trip_reason
+msgid "Trip Reason"
+msgstr ""
+
+#. module: trilab_car_mileage
+#: model_terms:ir.ui.view,arch_db:trilab_car_mileage.vehicle_model_form_view
+#: model_terms:ir.ui.view,arch_db:trilab_car_mileage.vehicle_model_tree_view
+msgid "Vehicle"
+msgstr ""
+
+#. module: trilab_car_mileage
+#: model_terms:ir.ui.view,arch_db:trilab_car_mileage.vehicle_model_form_view
+msgid "Vehicle Information"
+msgstr ""
+
+#. module: trilab_car_mileage
+#: model:ir.model,name:trilab_car_mileage.model_vehicle_model
+msgid "Vehicle Model"
+msgstr ""
+
+#. module: trilab_car_mileage
+#: model:ir.model.fields,field_description:trilab_car_mileage.field_vehicle_model__vehicle_type
+#: model_terms:ir.ui.view,arch_db:trilab_car_mileage.vehicle_model_search_view
+msgid "Vehicle Type"
+msgstr ""
+
+#. module: trilab_car_mileage
+#: model:ir.actions.act_window,name:trilab_car_mileage.action_vehicle
+#: model:ir.ui.menu,name:trilab_car_mileage.menu_trilab_car_mileage_vehicle
+#: model:ir.ui.menu,name:trilab_car_mileage.menu_vehicle
+msgid "Vehicles"
+msgstr ""
