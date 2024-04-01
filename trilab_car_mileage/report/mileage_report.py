@@ -1,5 +1,4 @@
 from odoo import fields, models, api
-from odoo.exceptions import ValidationError
 
 
 class MileageReport(models.TransientModel):
@@ -47,7 +46,7 @@ class MileageReport(models.TransientModel):
         """
         Compiles a list of mileage records associated with the selected vehicle that fall within the defined date range.
         """
-        mileages = self.env['mileage.model'].search(
+        self.mileage_ids = self.env['mileage.model'].search(
             [
                 ('departure_date', '>=', self.start_date),
                 ('return_date', '<=', self.end_date),
@@ -56,7 +55,6 @@ class MileageReport(models.TransientModel):
             ],
             order="departure_date desc, odometer_at_end desc",
         )
-        self.mileage_ids = mileages
 
     @api.onchange('start_date', 'end_date', 'registration_id', 'driver_id')
     def _compute_odometer_at_start(self):
@@ -64,20 +62,21 @@ class MileageReport(models.TransientModel):
         Calculates the odometer reading at the beginning of the earliest trip within the reporting period.
         """
         if self.mileage_ids:
-            previous_odometer_reading = self.mileage_ids[-1].get_previous_odometer()
-            self.odometer_at_start = previous_odometer_reading if previous_odometer_reading else 0
+            self.odometer_at_start = (
+                previous_odometer_reading
+                if (previous_odometer_reading := self.mileage_ids[-1].get_previous_odometer())
+                else 0
+            )
 
     @api.onchange('start_date', 'end_date', 'registration_id', 'driver_id')
     def _compute_odometer_at_end(self):
         """
         Determines the odometer reading at the end of the latest trip within the reporting period.
         """
-        odometers_list = self.mileage_ids.mapped('odometer_at_end')
-        self.odometer_at_end = max(odometers_list) if odometers_list else 0
+        self.odometer_at_end = (
+            max(odometers_list) if (odometers_list := self.mileage_ids.mapped('odometer_at_end')) else 0
+        )
 
     @api.onchange('start_date', 'end_date', 'registration_id', 'driver_id')
     def _compute_total_distance(self):
-        total = 0
-        for rec in self.mileage_ids:
-            total += rec.traveled_distance
-        self.total_distance = total
+        self.total_distance = sum(self.mileage_ids.mapped('traveled_distance'))

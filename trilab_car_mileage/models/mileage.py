@@ -4,13 +4,11 @@ from odoo.exceptions import ValidationError
 
 class Mileage(models.Model):
     """
-    The Mileage model tracks details about vehicle trips, including departure and return dates,
-    odometer readings, and trip reasons. It ensures there are no overlapping dates for the same vehicle
-    and validates the correctness of odometer entries.
+    This model tracks details about vehicle trips.
     """
 
     _name = "mileage.model"
-    _description = "Mileage Record"
+    _description = "Mileage Model"
     _order = "departure_date desc, odometer_at_end desc"
 
     departure_date = fields.Date(
@@ -18,40 +16,33 @@ class Mileage(models.Model):
         required=True,
         default=fields.Date.today,
         index=True,
-        help="Specifies the date when the trip began. This should be the day the vehicle left its initial location.",
+        help="Date when the trip started.",
     )
     return_date = fields.Date(
-        string="Date Of Return",
-        required=True,
-        default=fields.Date.today,
-        index=True,
-        help="Indicates the date when the trip ended and the vehicle returned to its final destination.",
+        string="Date Of Return", required=True, default=fields.Date.today, index=True, help="Date when the trip ended."
     )
-    trip_reason = fields.Char("Trip Reason", required=True, help="Describes the purpose of the trip.")
+    trip_reason = fields.Char(string="Trip Reason", required=True, help="Purpose of the trip.")
+    start_location = fields.Char(string="Start Location", required=True, help="Starting location of the trip.")
 
-    start_location = fields.Char(string="Start Location", required=True, help="The starting location of the trip.")
-
-    end_location = fields.Char(string="End Location", required=True, help="The final location of the trip")
+    end_location = fields.Char(string="End Location", required=True, help="Final destination of the trip.")
     odometer_at_end = fields.Integer(
-        string="Odometer Reading at End",
+        string="Odometer Reading at end",
         required=True,
         index=True,
-        help="The reading of the vehicle's odometer at the end of the trip.",
+        help="Vehicle's odometer reading at the end of the trip.",
     )
     traveled_distance = fields.Integer(
         string="Traveled Distance",
         compute="_compute_traveled_distance",
         default=None,
-        help="Automatically calculated distance traveled during the trip.",
+        help="Automatically calculated traveled distance.",
     )
-
     vehicle_id = fields.Many2one(
         "vehicle.model",
         string="Registration Number",
         ondelete="cascade",
         readonly=True,
-        help="Links this mileage record to a specific vehicle from the Vehicle model,"
-        "establishing which vehicle was used for the trip.",
+        help="Vehicle used for the trip.",
     )
     driver_id = fields.Many2one(
         "res.users",
@@ -59,17 +50,14 @@ class Mileage(models.Model):
         default=lambda self: self.env.user,
         ondelete="cascade",
         readonly=True,
-        help="Identifies the user who drove the vehicle for this specific trip."
-        "By default, this is set to the current logged-in user.",
+        help="Driver of the vehicle.",
     )
 
     def get_previous_odometer(self):
         """
-        Returns the previous mileage record for the same vehicle.
-        This search uses logical operators to find records with an earlier odometer reading on the same departure date
-        or any record from a previous date, prioritizing the closest records by date and odometer reading.
+        Fetches the previous odometer reading for the same vehicle, prioritizing records by date
+        and odometer reading.
         """
-
         if previous_odometer := self.sudo().search_fetch(
             [
                 "|",
@@ -88,48 +76,44 @@ class Mileage(models.Model):
 
     @api.onchange("odometer_at_end")
     def _compute_traveled_distance(self):
+        """
+        Computes the distance traveled by subtracting the current odometer reading from the
+        previous odometer reading.
+        """
         for rec in self:
-            rec.traveled_distance = rec.odometer_at_end - previous_odometer if (
-                previous_odometer := rec.get_previous_odometer()) else rec.odometer_at_end
+            rec.traveled_distance = (
+                rec.odometer_at_end - previous_odometer
+                if (previous_odometer := rec.get_previous_odometer())
+                else rec.odometer_at_end
+            )
 
     @api.constrains("departure_date", "return_date")
     def _check_dates(self):
         """
-        Ensures that the selected dates do not overlap with another mileage record for the same vehicle.
-        This validation prevents conflicting trip records for a single vehicle.
-        Still there can be two or more mileage records in one day.
+        Validates that the departure date is before or the same as the return date and
+        ensures no overlapping dates for the same vehicle.
         """
-        # Dates order
-        for rec in self.sorted(key=lambda r: r.departure_date):
-            if self.sudo().search_count(
-                [
-                    ("id", "not in", self.ids),
-                    ("vehicle_id", "=", rec.vehicle_id.id),
-                    ("return_date", ">", rec.departure_date),
-                ],
-                limit=1,
-            ):
-                raise ValidationError("You cannot input mileage with a date preceding the last entry")
-            # Dates validity
-            if rec.departure_date > rec.return_date:
-                raise ValidationError("The departure date cannot be later than the return date.")
+        if self.sudo().search_count(
+            [("id", "!=", self.id), ("vehicle_id", "=", self.vehicle_id.id), ("return_date", ">", self.departure_date)],
+            limit=1,
+        ):
+            raise ValidationError("You cannot input mileage with a date preceding the last entry")
+
+        if self.departure_date > self.return_date:
+            raise ValidationError("The departure date cannot be later than the return date.")
 
     @api.constrains("odometer_at_end")
     def _check_odometer(self):
         """
-        Checks that the new odometer reading is greater than the previous record for the same vehicle
-        and ensures that the traveled distance since the last record is at least 1 km.
-        This helps maintain the consistency of odometer readings and the logical sequence of travel records.
+        Ensures that the odometer reading at the end of a trip is greater than the previous
+        odometer reading for the same vehicle, with a minimum traveled distance of 1 km.
         """
-        # odometer consistency
-        for rec in self.sorted(key=lambda r: r.departure_date):
-            if (previous_odometer := rec.get_previous_odometer()) and rec.odometer_at_end < previous_odometer:
-                raise ValidationError(
-                    "A record with an earlier date has a higher odometer reading, which is inconsistent."
-                )
-            # trip greater then 1km
-            if previous_odometer and (rec.odometer_at_end - previous_odometer) < 1:
-                raise ValidationError("Mileage distance can't be shorter than 1 km.")
-            # not negative first odometer
-            if rec.odometer_at_end < 1:
-                raise ValidationError("The odometer reading cannot be negative.")
+
+        if (previous_odometer := self.get_previous_odometer()) and self.odometer_at_end < previous_odometer:
+            raise ValidationError("A record with an earlier date has a higher odometer reading, which is inconsistent.")
+
+        if previous_odometer and (self.odometer_at_end - previous_odometer) < 1:
+            raise ValidationError("Mileage distance can't be shorter than 1 km.")
+
+        if self.odometer_at_end < 1:
+            raise ValidationError("The odometer reading cannot be negative or 0.")
