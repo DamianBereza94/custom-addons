@@ -7,7 +7,7 @@
     'category': 'Fleet Management',
     'application': True,
     'version': '1.0',
-    'depends': ['base',],
+    'depends': ['base'],
     'data': [
         'security/security.xml',
         'security/ir.model.access.csv',
@@ -17,5 +17,4 @@
         'views/menuitem.xml',
     ],
     'license': 'LGPL-3',
-    
 }

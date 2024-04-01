@@ -27,19 +27,11 @@ class Mileage(models.Model):
         index=True,
         help="Indicates the date when the trip ended and the vehicle returned to its final destination.",
     )
-    trip_reason = fields.Char(
-        "Trip Reason", required=True, help="Describes the purpose of the trip."
-    )
+    trip_reason = fields.Char("Trip Reason", required=True, help="Describes the purpose of the trip.")
 
-    start_location = fields.Char(
-        string="Start Location",
-        required=True,
-        help="The starting location of the trip.",
-    )
+    start_location = fields.Char(string="Start Location", required=True, help="The starting location of the trip.")
 
-    end_location = fields.Char(
-        string="End Location", required=True, help="The final location of the trip"
-    )
+    end_location = fields.Char(string="End Location", required=True, help="The final location of the trip")
     odometer_at_end = fields.Integer(
         string="Odometer Reading at End",
         required=True,
@@ -59,7 +51,7 @@ class Mileage(models.Model):
         ondelete="cascade",
         readonly=True,
         help="Links this mileage record to a specific vehicle from the Vehicle model,"
-             "establishing which vehicle was used for the trip.",
+        "establishing which vehicle was used for the trip.",
     )
     driver_id = fields.Many2one(
         "res.users",
@@ -69,12 +61,6 @@ class Mileage(models.Model):
         readonly=True,
         help="Identifies the user who drove the vehicle for this specific trip."
         "By default, this is set to the current logged-in user.",
-    )
-
-    mileage_ids = fields.Many2one(
-        "mileage.model",
-        string="Mileage Records",
-        help="This field contains the mileage records associated with the vehicle.",
     )
 
     def get_previous_odometer(self):
@@ -97,7 +83,6 @@ class Mileage(models.Model):
             limit=1,
         ):
             return previous_odometer[0].odometer_at_end
-
         else:
             return None
 
@@ -118,9 +103,7 @@ class Mileage(models.Model):
         Still there can be two or more mileage records in one day.
         """
         # Dates order
-        for rec in self.sorted(
-            key=lambda r: r.departure_date
-        ):  # Sprawdza w kolejnosci od
+        for rec in self.sorted(key=lambda r: r.departure_date):  # Sprawdza w kolejnosci od
             # najmniejszego do
             # najwiekszego
 
@@ -132,14 +115,10 @@ class Mileage(models.Model):
                 ],
                 limit=1,
             ):
-                raise ValidationError(
-                    "You cannot input mileage with a date preceding the last entry"
-                )
+                raise ValidationError("You cannot input mileage with a date preceding the last entry")
             # Dates validity
             if rec.departure_date > rec.return_date:
-                raise ValidationError(
-                    "The departure date cannot be later than the return date."
-                )
+                raise ValidationError("The departure date cannot be later than the return date.")
 
     @api.constrains("odometer_at_end")
     def _check_odometer(self):
@@ -150,9 +129,7 @@ class Mileage(models.Model):
         """
         # odometer consistency
         for rec in self.sorted(key=lambda r: r.departure_date):
-            if (
-                previous_odometer := rec.get_previous_odometer()
-            ) and rec.odometer_at_end < previous_odometer:
+            if (previous_odometer := rec.get_previous_odometer()) and rec.odometer_at_end < previous_odometer:
                 raise ValidationError(
                     "A record with an earlier date has a higher odometer reading, which is inconsistent."
                 )

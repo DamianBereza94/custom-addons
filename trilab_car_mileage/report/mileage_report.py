@@ -11,16 +11,8 @@ class MileageReport(models.TransientModel):
     _description = 'Mileage Report'
     _transient_max_hours = 1
 
-    start_date = fields.Date(
-        string='Start Date',
-        required=True,
-        help='Defines the beginning of the reporting period.',
-    )
-    end_date = fields.Date(
-        string='End Date',
-        required=True,
-        help='Defines the end of the reporting period.',
-    )
+    start_date = fields.Date(string='Start Date', required=True, help='Defines the beginning of the reporting period.')
+    end_date = fields.Date(string='End Date', required=True, help='Defines the end of the reporting period.')
     odometer_at_start = fields.Integer(
         string='Odometer At Start',
         compute='_compute_odometer_at_start',
@@ -42,8 +34,7 @@ class MileageReport(models.TransientModel):
         help='Selects the vehicle for which the report is being generated.',
     )
     driver_id = fields.Many2one(
-        'res.users',
-        help='Displays the primary driver associated with the vehicle for the specified period.',
+        'res.users', help='Displays the primary driver associated with the vehicle for the specified period.'
     )
     mileage_ids = fields.One2many(
         'mileage.model',
@@ -63,7 +54,7 @@ class MileageReport(models.TransientModel):
                 ('vehicle_id', '=', self.registration_id.id),
                 ('driver_id', '=', self.driver_id.id),
             ],
-            order="departure_date desc, odometer_at_end desc"
+            order="departure_date desc, odometer_at_end desc",
         )
         self.mileage_ids = mileages
 
@@ -74,9 +65,7 @@ class MileageReport(models.TransientModel):
         """
         if self.mileage_ids:
             previous_odometer_reading = self.mileage_ids[-1].get_previous_odometer()
-            self.odometer_at_start = (
-                previous_odometer_reading if previous_odometer_reading else 0
-            )
+            self.odometer_at_start = previous_odometer_reading if previous_odometer_reading else 0
 
     @api.onchange('start_date', 'end_date', 'registration_id', 'driver_id')
     def _compute_odometer_at_end(self):
