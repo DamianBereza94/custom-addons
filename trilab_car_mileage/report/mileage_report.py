@@ -9,6 +9,7 @@ class MileageReport(models.TransientModel):
     _name = 'mileage.report.model'
     _description = 'Mileage Report'
     _transient_max_hours = 1
+    _transient_max_count = 1
 
     start_date = fields.Date(string='Start Date', required=True, help='Defines the beginning of the reporting period.')
     end_date = fields.Date(string='End Date', required=True, help='Defines the end of the reporting period.')
