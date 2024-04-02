@@ -31,6 +31,7 @@ class Vehicle(models.Model):
     user_ids = fields.Many2many(
         "res.users", string="Owners", help="Designates the vehicle's owners. Only modifiable by administrators."
     )
+    mileage_ids = fields.Many2one('mileage.model', string='mileages')
 
     @api.constrains("name")
     def _check_registration_number(self):
@@ -91,8 +92,12 @@ class Vehicle(models.Model):
         """
         return {
             'type': 'ir.actions.act_window',
-            'name': 'Mileage Record',
-            'view_mode': 'tree',
+            'name': self.name,
+            'view_mode': 'tree, form',
+            'views': [
+                (self.env.ref('trilab_car_mileage.mileage_model_tree_view').id, 'tree'),
+                (self.env.ref('trilab_car_mileage.mileage_model_form_view').id, 'form'),
+            ],
             'res_model': 'mileage.model',
             'target': 'current',
             'context': {'default_vehicle_id': self.id},

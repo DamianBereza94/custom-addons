@@ -19,14 +19,12 @@
             <field name='model'>vehicle.model</field>
             <field name='arch' type='xml'>
                 <form string='Vehicle'>
+                    <field name='active' invisible='1' groups="base.group_system"/>
                     <sheet>
                         <group string='Vehicle Information'>
-                            <field name="name" groups="base.group_system"/>
-                            <field name="name" groups="trilab_car_mileage.group_car_owners" readonly="1"/>
-                            <field name="vehicle_type" groups="base.group_system"/>
-                            <field name="vehicle_type" groups="trilab_car_mileage.group_car_owners" readonly="1"/>
+                            <field name="name"/>
+                            <field name="vehicle_type"/>
                             <field name='user_ids' groups='base.group_system' widget="many2many_tags"/>
-                            <field name='active' invisible='1' groups="base.group_system"/>
                         </group>
                     </sheet>
                 </form>
@@ -43,12 +41,12 @@
                     <field name='vehicle_type' string='Vehicle Type'/>
                     <field name='user_ids' string='Owner' groups='base.group_system'/>
                     <group>
-                        <filter string='Inactive' name='inactive_filter' domain="[('active', '=', False)]"/>
+                        <filter string='Inactive' name='inactive_filter' domain="[('active', '=', False)]" groups="base.group_system"/>
                     </group>
                     <group>
-                        <filter string='Engines ≤ 900cc' name='lte900_cars_filter'
+                        <filter string='Engines &lt;= 900cc' name='lte900_cars_filter'
                                 domain="[('vehicle_type', '=', 'lte9')]"/>
-                        <filter string='Engines > 900cc' name='gt900_cars_filter'
+                        <filter string='Engines &gt; 900cc' name='gt900_cars_filter'
                                 domain="[('vehicle_type', '=', 'gt9')]"/>
                         <separator/>
                         <filter string='Motorbikes' name='motorbike_filter' domain="[('vehicle_type', '=', 'mb')]"/>

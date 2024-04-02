@@ -11,6 +11,8 @@ class Mileage(models.Model):
     _description = "Mileage Model"
     _order = "departure_date desc, odometer_at_end desc"
 
+    name = fields.Char(string='Mileage Record', default=lambda self: f'{self.departure_date}-{self.return_date} '
+                                                                     f'{self.start_location}-{self.end_location}')
     departure_date = fields.Date(
         string="Date Of Departure",
         required=True,
@@ -30,6 +32,7 @@ class Mileage(models.Model):
         required=True,
         index=True,
         help="Vehicle's odometer reading at the end of the trip.",
+        group_operator=False,
     )
     traveled_distance = fields.Integer(
         string="Traveled Distance",
@@ -90,8 +93,8 @@ class Mileage(models.Model):
     @api.constrains("departure_date", "return_date")
     def _check_dates(self):
         """
-        Validates that the departure date is before or the same as the return date and
-        ensures no overlapping dates for the same vehicle.
+        Validates that the departure date is before or the same as the return date,
+        ensures no overlapping dates for the same vehicle and prevent from entering future date.
         """
         if self.sudo().search_count(
             [("id", "!=", self.id), ("vehicle_id", "=", self.vehicle_id.id), ("return_date", ">", self.departure_date)],
@@ -101,6 +104,9 @@ class Mileage(models.Model):
 
         if self.departure_date > self.return_date:
             raise ValidationError("The departure date cannot be later than the return date.")
+
+        if any(date > fields.Date.today() for date in [self.departure_date, self.return_date]):
+            raise ValidationError("You can't input a future date")
 
     @api.constrains("odometer_at_end")
     def _check_odometer(self):

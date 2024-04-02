@@ -17,5 +17,53 @@
                 </tree>
             </field>
         </record>
+
+        <record id='mileage_model_search_view' model='ir.ui.view'>
+            <field name='name'>mileage.model.search</field>
+            <field name='model'>mileage.model</field>
+            <field name='arch' type='xml'>
+                <search>
+                    <field name='departure_date' string='Departure Date'/>
+                    <field name='return_date' string='Return Date'/>
+                    <field name='trip_reason' string='Trip Reason'/>
+                    <field name='start_location' string='Start Location'/>
+                    <field name='end_location' string='End Location'/>
+                    <separator groups="base.group_system"/>
+                    <field name='driver_id' string='Owner' groups='base.group_system'/>
+                    <group string='Group By'>
+                        <filter string='Start Location' name='start_location_groupby'
+                                context="{'group_by': 'start_location'}"/>
+                        <filter string='End Location' name='end_location_groupby'
+                                context="{'group_by': 'end_location'}"/>
+                        <separator groups='base.group_system'/>
+                        <filter string='Owner' name='user_groupby' context="{'group_by': 'driver_id'}"
+                                groups='base.group_system'/>
+                    </group>
+                </search>
+            </field>
+        </record>
+
+        <record id='mileage_model_form_view' model='ir.ui.view'>
+            <field name='name'>mileage.model.form</field>
+            <field name='model'>mileage.model</field>
+            <field name='arch' type='xml'>
+                <form string='Mileage'>
+                    <sheet>
+                        <group string='Mileage Information'>
+                            <field name='departure_date'/>
+                            <field name='return_date'/>
+                            <field name='trip_reason'/>
+                            <field name='start_location'/>
+                            <field name='end_location'/>
+                            <field name='odometer_at_end'/>
+                            <field name='traveled_distance'/>
+                            <field name="vehicle_id"/>
+                            <field name='driver_id'/>
+                        </group>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
     </data>
 </odoo>
