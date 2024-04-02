@@ -11,8 +11,10 @@ class Mileage(models.Model):
     _description = "Mileage Model"
     _order = "departure_date desc, odometer_at_end desc"
 
-    name = fields.Char(string='Mileage Record', default=lambda self: f'{self.departure_date}-{self.return_date} '
-                                                                     f'{self.start_location}-{self.end_location}')
+    name = fields.Char(
+        string='Mileage Record',
+        default=lambda self: f'{self.departure_date}-{self.return_date}' f'{self.start_location}-{self.end_location}',
+    )
     departure_date = fields.Date(
         string="Date Of Departure",
         required=True,

@@ -27,6 +27,10 @@ class MileageReport(models.TransientModel):
         compute='_compute_total_distance',
         help='The total distance traveled by the vehicle within the specified period.',
     )
+    show_no_mileages_info = fields.Boolean(
+        compute='_compute_show_no_mileages_info',
+        help='Determines whether to display ' 'mileage information based on the presence of mileage_ids.',
+    )
     registration_id = fields.Many2one(
         'vehicle.model',
         string='Registration Number',
@@ -40,6 +44,10 @@ class MileageReport(models.TransientModel):
         compute='_compute_mileages_ids',
         help='Lists all mileage records associated with the vehicle that fall within the specified date range.',
     )
+
+    @api.onchange('start_date', 'end_date', 'registration_id', 'driver_id')
+    def _compute_show_no_mileages_info(self):
+        self.show_no_mileages_info = False if not self.mileage_ids else True
 
     @api.onchange('start_date', 'end_date', 'registration_id', 'driver_id')
     def _compute_mileages_ids(self):

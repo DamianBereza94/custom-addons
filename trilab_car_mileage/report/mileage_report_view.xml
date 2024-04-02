@@ -2,39 +2,44 @@
 <odoo>
     <data>
 
-        <record id='mileage_report_model_form_view' model='ir.ui.view'>
-            <field name='name'>mileage.report.form</field>
-            <field name='model'>mileage.report.model</field>
-            <field name='arch' type='xml'>
-                <form string='Mileage Report'>
+        <record id="mileage_report_model_form_view" model="ir.ui.view">
+            <field name="name">mileage.report.form</field>
+            <field name="model">mileage.report.model</field>
+            <field name="arch" type="xml">
+                <form string="Mileage Report">
                     <sheet>
-                        <field name='name' invisible="1"/>
+                        <div class="oe_title">
+                            <h1>
+                                <field name="name" readonly="1"/>
+                            </h1>
+                        </div>
                         <group>
-                            <group>
+                            <group string="Report Period">
                                 <field name="start_date" widget="daterange" options="{'end_date_field': 'end_date'}"/>
                                 <field name="end_date" widget="daterange" options="{'start_date_field': 'start_date'}"
                                        invisible="1"/>
-                                <field name='registration_id'/>
-                                <field name='driver_id'/>
                             </group>
-                            <group>
-                                <field name='odometer_at_start'/>
-                                <field name='odometer_at_end'/>
-                                <field name='total_distance'/>
+                            <group string="Vehicle And Driver Information">
+                                <field name="registration_id"/>
+                                <field name="driver_id"/>
                             </group>
                         </group>
+                        <group string="Report Details" invisible="not mileage_ids">
+                            <field name="odometer_at_start"/>
+                            <field name="odometer_at_end"/>
+                            <field name="total_distance"/>
+                        </group>
                         <notebook>
-                            <page string='Mileages'>
-                                <field name='mileage_ids' string='Mileages' widget="one2many">
+                            <page string="Detailed Mileages" invisible="not mileage_ids">
+                                <field name="mileage_ids">
                                     <tree>
-                                        <field name='id'/>
-                                        <field name='departure_date'/>
-                                        <field name='return_date'/>
-                                        <field name='start_location'/>
-                                        <field name='end_location'/>
-                                        <field name='odometer_at_end'/>
-                                        <field name='traveled_distance'/>
-                                        <field name='trip_reason'/>
+                                        <field name="departure_date"/>
+                                        <field name="return_date"/>
+                                        <field name="start_location"/>
+                                        <field name="end_location"/>
+                                        <field name="odometer_at_end"/>
+                                        <field name="traveled_distance"/>
+                                        <field name="trip_reason"/>
                                     </tree>
                                 </field>
                             </page>
@@ -44,15 +49,11 @@
             </field>
         </record>
 
+
         <record id='action_mileage_report' model='ir.actions.act_window'>
             <field name='name'>Mileage Reports</field>
             <field name='res_model'>mileage.report.model</field>
             <field name='view_mode'>form</field>
-            <field name='help' type='html'>
-                <p class='o_view_nocontent_smiling_face'>
-                    Create your first mileage report
-                </p>
-            </field>
         </record>
     </data>
 </odoo>

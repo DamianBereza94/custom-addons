@@ -66,9 +66,9 @@
                     <group string="Group By">
                         <filter string="Vehicle Type" name="vehicle_type_groupby"
                                 context="{'group_by': 'vehicle_type'}"/>
+                        <separator groups="base.group_system"/>
                         <filter string="Active Status" name="active_status_groupby"
                                 context="{'group_by': 'active'}" groups="base.group_system"/>
-                        <separator groups="base.group_system"/>
                         <filter string="Owner" name="user_groupby" context="{'group_by': 'user_ids'}"
                                 groups="base.group_system"/>
                     </group>
