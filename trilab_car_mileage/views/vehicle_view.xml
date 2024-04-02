@@ -1,63 +1,76 @@
 <odoo>
     <data>
-        <record id='vehicle_model_tree_view' model='ir.ui.view'>
-            <field name='name'>vehicle.model.tree</field>
-            <field name='model'>vehicle.model</field>
-            <field name='arch' type='xml'>
-                <tree string='Vehicle'>
-                    <field name='name'/>
-                    <field name='vehicle_type'/>
-                    <button name="open_mileage_records_report_view" type="object" class="btn-primary"
-                            string="Open mileage records"/>
-                    <field name='user_ids' groups='base.group_system' widget='many2many_tags'/>
+
+        <record id="vehicle_model_tree_view" model="ir.ui.view">
+            <field name="name">vehicle.model.tree</field>
+            <field name="model">vehicle.model</field>
+            <field name="arch" type="xml">
+                <tree string="Vehicles">
+                    <field name="name" string="Registration Number"/>
+                    <field name="vehicle_type" widget="selection"/>
+                    <field name="user_ids" string="Owners" widget="many2many_tags"/>
+                    <button name="open_mileage_records_report_view" type="object" icon="fa-car" class="oe_highlight"
+                            string="Open Mileage Records"/>
                 </tree>
             </field>
         </record>
 
-        <record id='vehicle_model_form_view' model='ir.ui.view'>
-            <field name='name'>vehicle.model.form</field>
-            <field name='model'>vehicle.model</field>
-            <field name='arch' type='xml'>
-                <form string='Vehicle'>
-                    <field name='active' invisible='1' groups="base.group_system"/>
+        <record id="vehicle_model_form_view" model="ir.ui.view">
+            <field name="name">vehicle.model.form</field>
+            <field name="model">vehicle.model</field>
+            <field name="arch" type="xml">
+                <form string="Vehicle">
+                    <header>
+                        <field name="active" groups="base.group_system" invisible="1"/>
+                        <button name="open_mileage_records_report_view" type="object"
+                                class="oe_highlight" icon="fa-car" string="Open Mileage Records"
+                                help="View mileage records for this vehicle."/>
+                    </header>
                     <sheet>
-                        <group string='Vehicle Information'>
-                            <field name="name"/>
-                            <field name="vehicle_type"/>
-                            <field name='user_ids' groups='base.group_system' widget="many2many_tags"/>
-                        </group>
+                        <div class="oe_title">
+                            <label for="name" class="oe_edit_only"/>
+                            <h1>
+                                <field name="name" placeholder="Enter registration number..."/>
+                            </h1>
+                        </div>
+                        <notebook>
+                            <page string="Vehicle Information">
+                                <group>
+                                    <field name="vehicle_type"/>
+                                    <field name="user_ids" groups="base.group_system" widget="many2many_tags"/>
+                                </group>
+                            </page>
+                        </notebook>
                     </sheet>
                 </form>
             </field>
         </record>
 
-        <record id='vehicle_model_search_view' model='ir.ui.view'>
-            <field name='name'>vehicle.model.search</field>
-            <field name='model'>vehicle.model</field>
-            <field name='arch' type='xml'>
+        <record id="vehicle_model_search_view" model="ir.ui.view">
+            <field name="name">vehicle.model.search</field>
+            <field name="model">vehicle.model</field>
+            <field name="arch" type="xml">
                 <search>
-                    <field name='name' string='Registration Number'/>
-                    <field name='active' string='Active'/>
-                    <field name='vehicle_type' string='Vehicle Type'/>
-                    <field name='user_ids' string='Owner' groups='base.group_system'/>
-                    <group>
-                        <filter string='Inactive' name='inactive_filter' domain="[('active', '=', False)]" groups="base.group_system"/>
-                    </group>
-                    <group>
-                        <filter string='Engines &lt;= 900cc' name='lte900_cars_filter'
-                                domain="[('vehicle_type', '=', 'lte9')]"/>
-                        <filter string='Engines &gt; 900cc' name='gt900_cars_filter'
-                                domain="[('vehicle_type', '=', 'gt9')]"/>
-                        <separator/>
-                        <filter string='Motorbikes' name='motorbike_filter' domain="[('vehicle_type', '=', 'mb')]"/>
-                        <filter string='Scooters' name='scooter_filter' domain="[('vehicle_type', '=', 'sct')]"/>
-                    </group>
-                    <group string='Group By'>
-                        <filter string='Vehicle Type' name='vehicle_type_groupby'
+                    <field name="name" string="Registration Number"/>
+                    <field name="vehicle_type" string="Vehicle Type"/>
+                    <field name="user_ids" string="Owner" groups="base.group_system"/>
+                    <filter string="Active" name="active_filter" domain="[('active', '=', True)]" groups="base.group_system"/>
+                    <filter string="Inactive" name="inactive_filter" domain="[('active', '=', False)]" groups="base.group_system"/>
+                    <separator/>
+                    <filter string="Engines &lt;= 900cc" name="lte900_cars_filter"
+                            domain="[('vehicle_type', '=', 'lte9')]"/>
+                    <filter string="Engines &gt; 900cc" name="gt900_cars_filter"
+                            domain="[('vehicle_type', '=', 'gt9')]"/>
+                    <filter string="Motorbikes" name="motorbike_filter" domain="[('vehicle_type', '=', 'mb')]"/>
+                    <filter string="Scooters" name="scooter_filter" domain="[('vehicle_type', '=', 'sct')]"/>
+                    <group string="Group By">
+                        <filter string="Vehicle Type" name="vehicle_type_groupby"
                                 context="{'group_by': 'vehicle_type'}"/>
-                        <separator groups='base.group_system'/>
-                        <filter string='Owner' name='user_groupby' context="{'group_by': 'user_ids'}"
-                                groups='base.group_system'/>
+                        <filter string="Active Status" name="active_status_groupby"
+                                context="{'group_by': 'active'}" groups="base.group_system"/>
+                        <separator groups="base.group_system"/>
+                        <filter string="Owner" name="user_groupby" context="{'group_by': 'user_ids'}"
+                                groups="base.group_system"/>
                     </group>
                 </search>
             </field>

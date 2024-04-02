@@ -31,7 +31,6 @@ class Vehicle(models.Model):
     user_ids = fields.Many2many(
         "res.users", string="Owners", help="Designates the vehicle's owners. Only modifiable by administrators."
     )
-    mileage_ids = fields.Many2one('mileage.model', string='mileages')
 
     @api.constrains("name")
     def _check_registration_number(self):
@@ -43,8 +42,7 @@ class Vehicle(models.Model):
         - Followed by 4 or 5 alphanumeric characters (letters and/or numbers),
         making up a total length of 7 or 8 characters.
         """
-        license_plate = compile(r"^[A-Z]{2,3}[A-Z0-9]{4,5}$")
-        if not license_plate.match(self.name):
+        if not LICENSE_PLATE.match(self.name):
             raise ValidationError(
                 "The registration number is invalid. It must start with 2 or 3 uppercase letters followed by 4 "
                 "or 5 alphanumeric characters."
