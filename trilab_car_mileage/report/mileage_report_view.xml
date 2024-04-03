@@ -6,7 +6,7 @@
             <field name="name">mileage.report.form</field>
             <field name="model">mileage.report.model</field>
             <field name="arch" type="xml">
-                <form string="Mileage Report">
+                <form string="Mileage Report" create="0" edit="0" duplicate="0" delete="0">
                     <sheet>
                         <div class="oe_title">
                             <h1>
@@ -29,15 +29,17 @@
                             <page string="Detailed Mileages">
                                 <field name="mileage_ids">
                                     <tree>
+                                        <field name="id" optional="show"/>
                                         <field name="departure_date" string="Mileage Date" widget="daterange"
-                                               options="{'end_date_field': 'return_date'}"/>
+                                               options="{'end_date_field': 'return_date'}" optional="show"/>
                                         <field name="return_date" column_invisible="1" widget="daterange"
-                                               options="{'start_date_field': 'departure_date'}"/>
-                                        <field name="start_location"/>
-                                        <field name="end_location"/>
-                                        <field name="odometer_at_end"/>
-                                        <field name="traveled_distance"/>
-                                        <field name="trip_reason"/>
+                                               options="{'start_date_field': 'departure_date'}" optional="show"/>
+                                        <field name="trip_reason" optional="show"/>
+                                        <field name="start_location" optional="show"/>
+                                        <field name="end_location" optional="show"/>
+                                        <field name="odometer_at_end" optional="show"/>
+                                        <field name="traveled_distance" optional="show"/>
+                                        <field name="driver_id" optional="show"/>
                                     </tree>
                                 </field>
                             </page>

@@ -1,9 +1,8 @@
 from odoo import fields, models, api
 from odoo.exceptions import ValidationError
 from re import compile
-from odoo.modules.module import get_module_resource
 
-LICENSE_PLATE = compile(r"^[A-Z]{2,3}[A-Z0-9]{4,5}$")
+LICENSE_PLATE = compile(r"^[A-Z]{2,3}[A-Z0-9]{1,5}$")
 
 
 class Vehicle(models.Model):
@@ -85,8 +84,8 @@ class Vehicle(models.Model):
         """
         Overrides the write method to update the vehicle owners' user group.
         """
+        super().write(vals)
         self.assign_users()
-        return super().write(vals)
 
     @api.model_create_multi
     def create(self, vals_list):

@@ -10,7 +10,7 @@
                     <field name="vehicle_type" widget="selection"/>
                     <field name="user_ids" string="Owners" widget="many2many_tags"/>
                     <button name="open_mileage_records_report_view" type="object" icon="fa-car" class="oe_highlight"
-                            string="Open Mileage Records"/>
+                            string="Open Mileage Records" groups="base.group_system,trilab_car_mileage.group_car_owners"/>
                 </tree>
             </field>
         </record>

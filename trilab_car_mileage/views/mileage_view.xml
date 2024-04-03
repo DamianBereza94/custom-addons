@@ -6,17 +6,17 @@
             <field name="model">mileage.model</field>
             <field name="arch" type="xml">
                 <tree string="Mileage Records" editable="top" duplicate="0">
-
+                    <field name="id" optional="show"/>
                     <field name="departure_date" string="Mileage Date" widget="daterange"
-                           options="{'end_date_field': 'return_date'}"/>
+                           options="{'end_date_field': 'return_date'}" optional="show"/>
                     <field name="return_date" column_invisible="1" widget="daterange"
-                           options="{'start_date_field': 'departure_date'}"/>
-                    <field name="trip_reason"/>
-                    <field name="start_location"/>
-                    <field name="end_location"/>
-                    <field name="odometer_at_end"/>
-                    <field name="traveled_distance"/>
-                    <field name="driver_id" groups="base.group_system"/>
+                           options="{'start_date_field': 'departure_date'}" optional="show"/>
+                    <field name="trip_reason" optional="show"/>
+                    <field name="start_location" optional="show"/>
+                    <field name="end_location" optional="show"/>
+                    <field name="odometer_at_end" optional="show"/>
+                    <field name="traveled_distance" optional="show"/>
+                    <field name="driver_id" optional="show"/>
                 </tree>
             </field>
         </record>
