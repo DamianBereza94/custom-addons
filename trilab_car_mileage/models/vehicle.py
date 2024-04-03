@@ -1,6 +1,7 @@
 from odoo import fields, models, api
 from odoo.exceptions import ValidationError
 from re import compile
+from odoo.modules.module import get_module_resource
 
 LICENSE_PLATE = compile(r"^[A-Z]{2,3}[A-Z0-9]{4,5}$")
 
@@ -28,9 +29,21 @@ class Vehicle(models.Model):
         required=True,
         help="The type of the vehicle.",
     )
+    status = fields.Selection(
+        [('in', "In Fleet"), ('off', "Off Fleet")],
+        compute='_compute_status',
+        help="Current status of the vehicle in the fleet.",
+    )
     user_ids = fields.Many2many(
         "res.users", string="Owners", help="Designates the vehicle's owners. Only modifiable by administrators."
     )
+
+    @api.onchange('active')
+    def _compute_status(self):
+        """
+        Compute status field value based on the 'active' field.
+        """
+        self.status = 'in' if self.active else 'off'
 
     @api.constrains("name")
     def _check_registration_number(self):

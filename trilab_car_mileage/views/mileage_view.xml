@@ -26,6 +26,9 @@
             <field name="model">mileage.model</field>
             <field name="arch" type="xml">
                 <search>
+                    <searchpanel>
+                        <field name="driver_id" select="multi" groups="base.group_system"/>
+                    </searchpanel>
                     <field name="departure_date" string="Departure Date"/>
                     <field name="return_date" string="Return Date"/>
                     <field name="trip_reason" string="Trip Reason"/>
@@ -93,9 +96,6 @@
                 </form>
             </field>
         </record>
-
-
-        
 
     </data>
 </odoo>

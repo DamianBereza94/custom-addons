@@ -21,23 +21,25 @@
             <field name="arch" type="xml">
                 <form string="Vehicle">
                     <header>
-                        <field name="active" groups="base.group_system" invisible="1"/>
+                        <field name="status" widget="statusbar" readonly='1'/>
+                        <field name="active" invisible="1"/>
                         <button name="open_mileage_records_report_view" type="object"
-                                class="oe_highlight" icon="fa-car" string="Open Mileage Records"
-                                help="View mileage records for this vehicle."/>
+                                class="oe_highlight" icon="fa-car" string="Open Mileage Records"/>
                     </header>
                     <sheet>
+
                         <div class="oe_title">
                             <label for="name" class="oe_edit_only"/>
                             <h1>
-                                <field name="name" placeholder="Enter registration number..."/>
+                                <field name="name" placeholder="Enter registration number"/>
                             </h1>
                         </div>
                         <notebook>
                             <page string="Vehicle Information">
                                 <group>
-                                    <field name="vehicle_type"/>
-                                    <field name="user_ids" groups="base.group_system" widget="many2many_tags"/>
+                                    <field name="vehicle_type" placeholder="Select vehicle type"/>
+                                    <field name="user_ids" groups="base.group_system" widget="many2many_tags"
+                                           placeholder="Assign vehicle owners"/>
                                 </group>
                             </page>
                         </notebook>
@@ -54,8 +56,10 @@
                     <field name="name" string="Registration Number"/>
                     <field name="vehicle_type" string="Vehicle Type"/>
                     <field name="user_ids" string="Owner" groups="base.group_system"/>
-                    <filter string="Active" name="active_filter" domain="[('active', '=', True)]" groups="base.group_system"/>
-                    <filter string="Inactive" name="inactive_filter" domain="[('active', '=', False)]" groups="base.group_system"/>
+                    <filter string="Active" name="active_filter" domain="[('active', '=', True)]"
+                            groups="base.group_system"/>
+                    <filter string="Inactive" name="inactive_filter" domain="[('active', '=', False)]"
+                            groups="base.group_system"/>
                     <separator/>
                     <filter string="Engines &lt;= 900cc" name="lte900_cars_filter"
                             domain="[('vehicle_type', '=', 'lte9')]"/>

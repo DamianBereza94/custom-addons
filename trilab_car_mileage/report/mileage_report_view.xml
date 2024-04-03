@@ -17,12 +17,12 @@
                             <group string="Report Period">
                                 <field name="start_date" string="Mileage Period" widget="daterange"
                                        options="{'end_date_field': 'end_date'}"/>
-                                <field name="end_date" invisible="1" widget="daterange"
+                                <field name="end_date" invisible="1" readonly="1" widget="daterange"
                                        options="{'start_date_field': 'start_date'}"/>
                             </group>
                             <group string="Vehicle And Driver Information">
-                                <field name="registration_id"/>
-                                <field name="driver_id"/>
+                                <field name="registration_id" placeholder="Select the vehicle"/>
+                                <field name="driver_id" placeholder="Select the driver"/>
                             </group>
                         </group>
                         <notebook invisible="not mileage_ids">
