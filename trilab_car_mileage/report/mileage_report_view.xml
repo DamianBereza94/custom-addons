@@ -29,8 +29,8 @@
                             <field name="odometer_at_end"/>
                             <field name="total_distance"/>
                         </group>
-                        <notebook>
-                            <page string="Detailed Mileages" invisible="not mileage_ids">
+                        <notebook invisible="not mileage_ids">
+                            <page string="Detailed Mileages">
                                 <field name="mileage_ids">
                                     <tree>
                                         <field name="departure_date"/>
