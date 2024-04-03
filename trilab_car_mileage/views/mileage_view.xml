@@ -6,8 +6,11 @@
             <field name="model">mileage.model</field>
             <field name="arch" type="xml">
                 <tree string="Mileage Records" editable="top" duplicate="0">
-                    <field name="departure_date"/>
-                    <field name="return_date"/>
+
+                    <field name="departure_date" string="Mileage Date" widget="daterange"
+                           options="{'end_date_field': 'return_date'}"/>
+                    <field name="return_date" column_invisible="1" widget="daterange"
+                           options="{'start_date_field': 'departure_date'}"/>
                     <field name="trip_reason"/>
                     <field name="start_location"/>
                     <field name="end_location"/>
@@ -69,8 +72,10 @@
                         </div>
                         <group>
                             <group string="Trip Details">
-                                <field name="departure_date"/>
-                                <field name="return_date"/>
+                                <field name="departure_date" string="Mileage Date" widget="daterange"
+                                       options="{'end_date_field': 'return_date'}"/>
+                                <field name="return_date" invisible="1" widget="daterange"
+                                       options="{'start_date_field': 'departure_date'}"/>
                                 <field name="trip_reason"/>
                                 <field name="start_location"/>
                                 <field name="end_location"/>
@@ -88,6 +93,9 @@
                 </form>
             </field>
         </record>
+
+
+        
 
     </data>
 </odoo>
