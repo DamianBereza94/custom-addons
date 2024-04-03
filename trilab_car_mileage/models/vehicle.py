@@ -84,17 +84,18 @@ class Vehicle(models.Model):
         """
         Overrides the write method to update the vehicle owners' user group.
         """
-        super().write(vals)
+        result = super().write(vals)
         self.assign_users()
+        return result
 
     @api.model_create_multi
     def create(self, vals_list):
         """
         Overrides the create method to update the vehicle owners' user group.
         """
-        rec = super().create(vals_list)
-        rec.assign_users()
-        return rec
+        result = super().create(vals_list)
+        result.assign_users()
+        return result
 
     def open_mileage_records_report_view(self):
         """

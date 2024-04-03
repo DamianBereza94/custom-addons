@@ -40,7 +40,7 @@ class Mileage(models.Model):
     traveled_distance = fields.Integer(
         string="Traveled Distance",
         compute="_compute_traveled_distance",
-        default=None,
+        default=0,
         help="Automatically calculated traveled distance.",
     )
     vehicle_id = fields.Many2one(
@@ -87,7 +87,7 @@ class Mileage(models.Model):
             return previous_odometer[0].odometer_at_end
         return None
 
-    @api.onchange("odometer_at_end")
+    @api.depends("odometer_at_end")
     def _compute_traveled_distance(self):
         """
         Computes the distance traveled by subtracting the current odometer reading from the
