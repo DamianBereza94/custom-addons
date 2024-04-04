@@ -43,6 +43,10 @@ class Mileage(models.Model):
         default=0,
         help="Automatically calculated traveled distance.",
     )
+    row_number = fields.Integer(
+        string='#',
+        compute='_compute_row_number',
+        help='This field dynamically assigns a row number to each record')
     vehicle_id = fields.Many2one(
         "vehicle.model",
         string="Registration Number",
@@ -58,6 +62,13 @@ class Mileage(models.Model):
         readonly=True,
         help="Driver of the vehicle.",
     )
+
+    @api.onchange('traveled_distance')
+    def _compute_row_number(self):
+        """
+        Calculates and assigns a row number for each record in the set.
+        """
+        self.row_number = [num for num, rec in enumerate(self, start=1)]
 
     @api.depends('departure_date', 'return_date', 'vehicle_id', 'driver_id')
     def _compute_name(self):
