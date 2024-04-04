@@ -1,77 +1,13 @@
 <odoo>
     <data>
 
-        <record id="mileage_model_tree_view" model="ir.ui.view">
-            <field name="name">mileage.model.tree</field>
-            <field name="model">mileage.model</field>
-            <field name="arch" type="xml">
-                <tree string="Mileage Records" editable="top" duplicate="0">
-                    <field name="departure_date" string="Mileage Date" widget="daterange"
-                           options="{'end_date_field': 'return_date'}" optional="show"/>
-                    <field name="return_date" column_invisible="1" widget="daterange"
-                           options="{'start_date_field': 'departure_date'}" optional="show"/>
-                    <field name="trip_reason" optional="show"/>
-                    <field name="start_location" optional="show"/>
-                    <field name="end_location" optional="show"/>
-                    <field name="odometer_at_end" optional="show"/>
-                    <field name="traveled_distance" optional="show"/>
-                    <field name="driver_id" optional="show"/>
-                </tree>
-            </field>
-        </record>
-
-        <record id="mileage_model_search_view" model="ir.ui.view">
-            <field name="name">mileage.model.search</field>
-            <field name="model">mileage.model</field>
-            <field name="arch" type="xml">
-                <search>
-                    <searchpanel>
-                        <field name="driver_id" select="multi" groups="base.group_system"/>
-                    </searchpanel>
-                    <field name="departure_date" string="Departure Date"/>
-                    <field name="return_date" string="Return Date"/>
-                    <field name="trip_reason" string="Trip Reason"/>
-                    <field name="start_location" string="Start Location"/>
-                    <field name="end_location" string="End Location"/>
-                    <separator/>
-                    <field name="vehicle_id" string="Vehicle" groups="base.group_system"/>
-                    <field name="driver_id" string="Driver" groups="base.group_system"/>
-                    <separator/>
-                    <filter name="todays_trips" string="Today's Trips"
-                            domain="[('departure_date', '=', context_today())]"/>
-                    <filter name="this_weeks_trips" string="This Week's Trips"
-                            domain="[('departure_date', '>=', (context_today() - relativedelta(weeks=1)))]"/>
-                    <filter name="this_months_trips" string="This Month's Trips"
-                            domain="[('departure_date', '>=', (context_today() - relativedelta(months=1)))]"/>
-                    <group string="Group By">
-                        <filter string="Departure Date" name="departure_date_groupby"
-                                context="{'group_by': 'departure_date'}"/>
-                        <filter string="Return Date" name="return_date_groupby" context="{'group_by': 'return_date'}"/>
-                        <separator/>
-                        <filter string="Start Location" name="start_location_groupby"
-                                context="{'group_by': 'start_location'}"/>
-                        <filter string="End Location" name="end_location_groupby"
-                                context="{'group_by': 'end_location'}"/>
-                        <separator groups="base.group_system"/>
-                        <filter string="Driver" name="driver_id_groupby" context="{'group_by': 'driver_id'}"
-                                groups="base.group_system"/>
-                    </group>
-                </search>
-            </field>
-        </record>
-
-
         <record id="mileage_model_form_view" model="ir.ui.view">
             <field name="name">mileage.model.form</field>
             <field name="model">mileage.model</field>
             <field name="arch" type="xml">
                 <form string="Mileage Record">
                     <sheet>
-                        <div class="oe_title">
-                            <h1>
-                                <field name="name"/>
-                            </h1>
-                        </div>
+                            <field name="name" invisible="1"/>
                         <group>
                             <group string="Trip Details">
                                 <field name="departure_date" string="Mileage Date" widget="daterange"

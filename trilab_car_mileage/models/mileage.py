@@ -11,11 +11,7 @@ class Mileage(models.Model):
     _description = "Mileage Model"
     _order = "departure_date desc, odometer_at_end desc"
 
-    name = fields.Char(
-        string='Mileage Record',
-        compute='_compute_name',
-        help='Automatically generated name based on the trip\'s dates.'
-    )
+    name = fields.Char(default='Mileage Record')
     departure_date = fields.Date(
         string="Date Of Departure",
         required=True,
@@ -70,13 +66,6 @@ class Mileage(models.Model):
         """
         for index, rec in enumerate(self, start=1):
             rec.row_number = index
-
-    @api.depends('departure_date', 'return_date', 'vehicle_id', 'driver_id')
-    def _compute_name(self):
-        """
-        Computes and assigns the name field for each record.
-        """
-        self.name = f'{self.departure_date}:{self.return_date}, from {self.start_location} to {self.end_location}'
 
     def get_previous_odometer(self):
         """

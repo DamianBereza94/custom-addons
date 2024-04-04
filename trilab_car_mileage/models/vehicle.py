@@ -36,6 +36,7 @@ class Vehicle(models.Model):
     user_ids = fields.Many2many(
         "res.users", string="Owners", help="Designates the vehicle's owners. Only modifiable by administrators."
     )
+    mileage_ids = fields.One2many('mileage.model', 'vehicle_id', string='Mileage Records')
 
     @api.onchange('active')
     def _compute_status(self):
@@ -105,14 +106,12 @@ class Vehicle(models.Model):
         """
         return {
             'type': 'ir.actions.act_window',
-            'name': self.name,
-            'view_mode': 'tree, form',
+            'name': 'Register Mileage',
+            'view_mode': 'form',
             'views': [
-                (self.env.ref('trilab_car_mileage.mileage_model_tree_view').id, 'tree'),
                 (self.env.ref('trilab_car_mileage.mileage_model_form_view').id, 'form'),
             ],
             'res_model': 'mileage.model',
-            'target': 'current',
+            'target': 'new',
             'context': {'default_vehicle_id': self.id},
-            'domain': [('vehicle_id', '=', self.id)],
         }

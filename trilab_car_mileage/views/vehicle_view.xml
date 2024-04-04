@@ -11,7 +11,7 @@
                     <field name="user_ids" string="Owners" widget="many2many_tags"/>
                     <button name="open_mileage_records_report_view" type="object" icon="fa-car"
                             class="oe_highlight"
-                            string="Open Mileage Records"
+                            string="Register Mileage"
                             groups="base.group_system,trilab_car_mileage.group_car_owners"/>
                 </tree>
             </field>
@@ -23,13 +23,10 @@
             <field name="arch" type="xml">
                 <form string="Vehicle">
                     <header>
-                        <field name="status" widget="statusbar" readonly='1' invisible="not id"/>
+                        <field name="status" widget="statusbar" readonly='1' invisible="not id" groups="base.group_system"/>
                         <field name="active" invisible="1"/>
-                        <button name="open_mileage_records_report_view" type="object"
-                                class="oe_highlight" icon="fa-car" string="Open Mileage Records" invisible="not id"/>
                     </header>
                     <sheet>
-
                         <div class="oe_title">
                             <label for="name" class="oe_edit_only"/>
                             <h1>
@@ -37,6 +34,22 @@
                             </h1>
                         </div>
                         <notebook>
+                            <page string="Mileage Records">
+                                <field name="mileage_ids">
+                                    <tree string="Mileage Records" editable="top" create="0">
+                                        <field name="departure_date" string="Mileage Date" widget="daterange"
+                                               options="{'end_date_field': 'return_date'}" optional="show"/>
+                                        <field name="return_date" column_invisible="1" widget="daterange"
+                                               options="{'start_date_field': 'departure_date'}" optional="show"/>
+                                        <field name="trip_reason" optional="show"/>
+                                        <field name="start_location" optional="show"/>
+                                        <field name="end_location" optional="show"/>
+                                        <field name="odometer_at_end" optional="show"/>
+                                        <field name="traveled_distance" optional="show"/>
+                                        <field name="driver_id" optional="show"/>
+                                    </tree>
+                                </field>
+                            </page>
                             <page string="Vehicle Information">
                                 <group>
                                     <field name="vehicle_type" placeholder="Select vehicle type"/>
