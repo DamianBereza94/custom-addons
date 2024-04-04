@@ -6,8 +6,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 17.0+e\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-04-03 21:48+0000\n"
-"PO-Revision-Date: 2024-04-03 21:48+0000\n"
+"POT-Creation-Date: 2024-04-04 14:27+0000\n"
+"PO-Revision-Date: 2024-04-04 14:27+0000\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
@@ -310,7 +310,6 @@ msgstr "Rejestry przebiegu"
 
 #. module: trilab_car_mileage
 #: model:ir.model,name:trilab_car_mileage.model_mileage_report_model
-#: model:ir.model.fields,field_description:trilab_car_mileage.field_mileage_report_model__name
 #: model_terms:ir.ui.view,arch_db:trilab_car_mileage.mileage_report_model_form_view
 msgid "Mileage Report"
 msgstr "Raport przebiegu"
@@ -334,6 +333,11 @@ msgstr "Motocykl"
 #: model_terms:ir.ui.view,arch_db:trilab_car_mileage.vehicle_model_search_view
 msgid "Motorbikes"
 msgstr "Motocykle"
+
+#. module: trilab_car_mileage
+#: model:ir.model.fields,field_description:trilab_car_mileage.field_mileage_report_model__name
+msgid "Name"
+msgstr "Raport przebiegu"
 
 #. module: trilab_car_mileage
 #: model:ir.model.fields,field_description:trilab_car_mileage.field_mileage_report_model__odometer_at_end
@@ -486,6 +490,11 @@ msgstr "Podróże w tym miesiącu"
 #: model_terms:ir.ui.view,arch_db:trilab_car_mileage.mileage_model_search_view
 msgid "This Week's Trips"
 msgstr "Podróże w tym tygodniu"
+
+#. module: trilab_car_mileage
+#: model:ir.model.fields,help:trilab_car_mileage.field_mileage_model__row_number
+msgid "This field dynamically assigns a row number to each record"
+msgstr "To pole dynamicznie przypisuje numer wiersza do każdego rekordu"
 
 #. module: trilab_car_mileage
 #: model_terms:ir.ui.view,arch_db:trilab_car_mileage.mileage_model_search_view

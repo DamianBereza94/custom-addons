@@ -63,12 +63,13 @@ class Mileage(models.Model):
         help="Driver of the vehicle.",
     )
 
-    @api.onchange('traveled_distance')
+    @api.depends('traveled_distance')  # Zmieniłem trigger, bo row_number nie zależy bezpośrednio od traveled_distance
     def _compute_row_number(self):
         """
-        Calculates and assigns a row number for each record in the set.
+        Calculates and assigns a row number for each record individually.
         """
-        self.row_number = [num for num, rec in enumerate(self, start=1)]
+        for index, rec in enumerate(self, start=1):
+            rec.row_number = index
 
     @api.depends('departure_date', 'return_date', 'vehicle_id', 'driver_id')
     def _compute_name(self):

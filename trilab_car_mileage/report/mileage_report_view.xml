@@ -30,6 +30,7 @@
                                 <field name="mileage_ids">
                                     <tree>
                                         <field name="row_number" optional="show"/>
+                                        <field name="id" optional="show"/>
                                         <field name="departure_date" string="Mileage Date" widget="daterange"
                                                options="{'end_date_field': 'return_date'}" optional="show"/>
                                         <field name="return_date" column_invisible="1" widget="daterange"

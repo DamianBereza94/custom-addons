@@ -9,8 +9,10 @@
                     <field name="name" string="Registration Number"/>
                     <field name="vehicle_type" widget="selection"/>
                     <field name="user_ids" string="Owners" widget="many2many_tags"/>
-                    <button name="open_mileage_records_report_view" type="object" icon="fa-car" class="oe_highlight"
-                            string="Open Mileage Records" groups="base.group_system,trilab_car_mileage.group_car_owners"/>
+                    <button name="open_mileage_records_report_view" type="object" icon="fa-car"
+                            class="oe_highlight"
+                            string="Open Mileage Records"
+                            groups="base.group_system,trilab_car_mileage.group_car_owners"/>
                 </tree>
             </field>
         </record>
@@ -21,10 +23,10 @@
             <field name="arch" type="xml">
                 <form string="Vehicle">
                     <header>
-                        <field name="status" widget="statusbar" readonly='1'/>
+                        <field name="status" widget="statusbar" readonly='1' invisible="not id"/>
                         <field name="active" invisible="1"/>
                         <button name="open_mileage_records_report_view" type="object"
-                                class="oe_highlight" icon="fa-car" string="Open Mileage Records"/>
+                                class="oe_highlight" icon="fa-car" string="Open Mileage Records" invisible="not id"/>
                     </header>
                     <sheet>
 

@@ -67,9 +67,11 @@ class Vehicle(models.Model):
         """
         Updates the car owners' user group. If include_self is True, current users are included in the update.
         """
-        user_ids_to_process = set(self.user_ids.ids) if include_self else set()
+        user_ids_to_process = set(*[rec.user_ids.ids for rec in self]) if include_self else set()
 
-        user_ids_to_process.update(self.search_fetch([('id', '!=', self.id)], ['user_ids']).user_ids.ids)
+        user_ids_to_process.update(
+                *[rec.search_fetch([('id', '!=', rec.id)], ['user_ids']).user_ids.ids for rec in self]
+            )
 
         self.env.ref("trilab_car_mileage.group_car_owners").write({"users": [(6, 0, list(user_ids_to_process))]})
 
